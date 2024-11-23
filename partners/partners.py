@@ -6,23 +6,17 @@
 from openpyxl import load_workbook
 
 if __name__ == '__main__':
-    wb = load_workbook('Me & My partner.xlsx')
-    sheet = wb.active
-
-    valid_pairs = []
-
-    for row in sheet:
+    wb = load_workbook('Me & My Partner.xlsx')
+    groups = []
+    for row in wb.active:
         values = [cell.value for cell in row]
+        pairs = (values[1], values[2])
+        if None not in pairs:
+            if values[2] < values[1]:
+                pairs = (values[2], values[1])
+            if pairs not in groups:
+                groups.append(pairs)
 
-        if values[1] is not None and values[2] is not None:
-            pair = (values[1], values[2])
-
-            if values[1] < values[2]:
-                pair = (values[2], values[1])
-            if pair not in valid_pairs:
-                valid_pairs.append(pair)
-
-
-    print(f"Total number of valid pairs: {len(valid_pairs)}")
-    print(valid_pairs)
-
+    # prints
+    for pair in groups:
+        print(pair)
