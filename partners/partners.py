@@ -16,7 +16,6 @@ if __name__ == '__main__':
                 pairs = (values[2], values[1])
             if pairs not in groups:
                 groups.append(pairs)
-
-    # prints
+                
     for pair in groups:
         print(pair)
